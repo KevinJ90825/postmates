@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Kevin Johnson | Postmates X</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+        <h1>Kevin Johnson | Postmates X</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <form id="address_form">
+                    {% csrf_token %}
+                    <p>
+                      <label for="address">Address to Geocode</label>
+                      <input type="text" id="address" name="address" placeholder="Address">
+                    </p>
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <p id="response" style="white-space: pre; height: 100vh; overflow-y: scroll;"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.min.js"
+      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+            $( "#address_form" ).submit(function( event ) {
+              console.log($('#address').val());
+              event.preventDefault();
+              $.ajax({url: '/api/geocode/',
+                    data: {'address': $('#address').val()},
+                    success: function(res) {
+                        console.log(res);
+                        $('#response').text(JSON.stringify(res, null, 2));
+                    }
+                });
+            });
+        });
+    </script>
+  </body>
+</html>

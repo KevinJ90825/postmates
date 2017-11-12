@@ -24,7 +24,7 @@ class GeocodeHelper(object):
     @classmethod
     def query_address(cls, address, service):
         geocoders = [GoogleGeocodeHelper(), HereGeocodeHelper()] if service == "google" else \
-            [HereGeocodeHelper(), GoogleGeocodeHelper]
+            [HereGeocodeHelper(), GoogleGeocodeHelper()]
 
         for geo in geocoders:
             res = geo.make_request(address)

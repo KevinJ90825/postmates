@@ -14,5 +14,9 @@ From the project's main directory run `pip install -r requirements.txt` to insta
 Once you've completed the setup, you'll be able to run the project with the command `manage.py runserver`.
 
 After the service has been started, a GUI can be accessed by going to `http://127.0.0.1` or you can make direct requests
-to the API at `http://127.0.0.1/api/geocode/`. 
+to the API at `http://127.0.0.1/api/geocode/`.
+
+At the api endpoint, you can pass two parameters. The first required parameter is `address`, which is the query string you
+are trying to geocode. The second parameter, `service`,  is optional. If you pass "google" as the parameter, the service
+will use Google's geocoding service. Otherwise, Here's geocoding service will be used.
 

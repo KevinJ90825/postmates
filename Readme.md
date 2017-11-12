@@ -16,7 +16,7 @@ Once you've completed the setup, you'll be able to run the project with the comm
 After the service has been started, a GUI can be accessed by going to `http://127.0.0.1` or you can make direct requests
 to the API at `http://127.0.0.1/api/geocode/`.
 
-At the api endpoint, you can pass two parameters. The first required parameter is `address`, which is the query string you
+At the api endpoint, you can pass two parameters with a GET request. The first required parameter is `address`, which is the query string you
 are trying to geocode. The second parameter, `service`,  is optional. If you pass "google" as the parameter, the service
 will use Google's geocoding service. Otherwise, Here's geocoding service will be used.
 

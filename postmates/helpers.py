@@ -1,4 +1,6 @@
 import urllib
+from urllib.error import HTTPError
+
 from django.conf import settings
 import json
 
@@ -7,8 +9,9 @@ class GeocodeHelper(object):
 
     def make_request(self, address):
         params = self.get_params(address)
-        r = urllib.request.urlopen(self.API_URL + "?" + params)
-        if r.getcode() != 200:
+        try:
+            r = urllib.request.urlopen(self.API_URL + "?" + params)
+        except HTTPError as e:
             return None
         return self.normalize_answer(json.loads(r.read()))
 
@@ -19,7 +22,7 @@ class GeocodeHelper(object):
         raise NotImplementedError
 
     @classmethod
-    def query_address(cls, address, service="google"):
+    def query_address(cls, address, service):
         geocoders = [GoogleGeocodeHelper(), HereGeocodeHelper()] if service == "google" else \
             [HereGeocodeHelper(), GoogleGeocodeHelper]
 
